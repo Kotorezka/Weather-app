@@ -11,7 +11,7 @@ const WeatherCard = (props : WeatherCardProps) => {
   const date = new Date(props.dt)
   return (
     <div>
-        <img src={ `http://openweathermap.org/img/wn/${props.icon}@2x.png` } />
+        <img src={ `${process.env.REACT_APP_ICON_URL}/${props.icon}@2x.png` } />
         <p>{props.temp}</p>
         <p>{date.toString()}</p>
     </div>
