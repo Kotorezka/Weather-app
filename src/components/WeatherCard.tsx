@@ -1,13 +1,19 @@
 // eslint-disable-next-line no-use-before-define
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 
-const WeatherCard: FunctionComponent = ({ dt, temp, icon }:any) => {
-  const date = new Date(dt)
+interface WeatherCardProps {
+  dt: number,
+  temp: string,
+  icon: string,
+}
+
+const WeatherCard = (props : WeatherCardProps) => {
+  const date = new Date(props.dt)
   return (
     <div>
-        <img src={ `http://openweathermap.org/img/wn/${icon}@2x.png` } />
-        <p>{temp}</p>
-        <p>{date}</p>
+        <img src={ `http://openweathermap.org/img/wn/${props.icon}@2x.png` } />
+        <p>{props.temp}</p>
+        <p>{date.toString()}</p>
     </div>
   )
 }
