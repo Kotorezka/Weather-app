@@ -13,7 +13,7 @@ const WeatherCard = (props : WeatherCardProps) => {
     <div>
         <img src={ `${process.env.REACT_APP_ICON_URL}/${props.icon}@2x.png` } />
         <p>{props.temp}</p>
-        <p>{date.toString()}</p>
+        <p>{date.toLocaleDateString()}</p>
     </div>
   )
 }
