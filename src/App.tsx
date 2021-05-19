@@ -24,7 +24,7 @@ function App () {
   }, [lat, lon])
   return (
     <div className="App">
-      {(typeof data !== 'undefined') ? (<WeatherCard dt={data.current.dt * 1000} temp={data.current.temp} icon={data.current.weather[0].icon} />) : (<div><CitySelector cities={Cities} /></div>)}
+      {(typeof data.current !== 'undefined') ? (<WeatherCard dt={data.current.dt * 1000} temp={data.current.temp} icon={data.current.weather[0].icon} />) : (<div><CitySelector cities={Cities} /></div>)}
     </div>
   )
 }
