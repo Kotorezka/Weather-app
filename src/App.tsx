@@ -6,13 +6,16 @@ import Cities from './source/Cities.json'
 import CitySelector from './components/CitySelector'
 
 function App () {
+  type Key = keyof typeof Cities
   const [lat, setLat] = useState<any>([])
   const [lon, setLon] = useState<any>([])
   const [data, setData] = useState<any>([])
+  const [city, SetCity] = useState<Key>('Samara')
   useEffect(() => {
     const fetchData = async () => {
-      setLat(Cities.Samara.lat)
-      setLon(Cities.Samara.lon)
+      SetCity('Kazan')
+      setLat(Cities[city].lat)
+      setLon(Cities[city].lon)
       await fetch(`${process.env.REACT_APP_API_URL}lat=${lat}&lon=${lon}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`)
         .then(res => res.json())
         .then(result => {
