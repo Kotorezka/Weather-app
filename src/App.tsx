@@ -1,33 +1,86 @@
 // eslint-disable-next-line no-use-before-define
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
 import WeatherCard from './components/WeatherCard'
 import Cities from './source/Cities.json'
 import CitySelector from './components/CitySelector'
-import UseFetch from './hooks/UseFetch'
+import UseForecastFetch from './hooks/UseForecastFetch'
+import UseHistoryFetch from './hooks/UseHistoryFetch'
 function App () {
-  type Key = keyof typeof Cities
-  const { data, error, isLoading, setUrl } = UseFetch('')
-  const handleChange = (e: any) => {
-    setUrl(`${process.env.REACT_APP_API_URL}lat=${Cities[e as Key].lat}&lon=${Cities[e as Key].lon}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`)
+  // Custom type to interate JSON
+  type IteratorType = keyof typeof Cities
+  const [date, setDate] = useState<number>(NaN)
+  const [city, setCity] = useState<string>('emptyCity')
+  // Current date
+  const maxDate: string = (new Date(Date.now())).toLocaleDateString().split('.').reverse().join('-')
+  // The day that was 5 days ago before current date (API requirement)
+  const minDate: string = (new Date((Date.now() - 1000 * 3600 * 24 * 4))).toLocaleDateString().split('.').reverse().join('-')
+  // Custom hook for forecast
+  const { forecast, forecastError, isForecastLoading, setForecastUrl } = UseForecastFetch('')
+  // Custom hook for history weather
+  const { history, historyError, isHistoryLoading, setHistoryUrl } = UseHistoryFetch('')
+  // Fetch data for Forecast
+  const handleForecastCitySelectorChange = (e: any) => {
+    setForecastUrl(`${process.env.REACT_APP_API_URL}lat=${Cities[e as IteratorType].lat}&lon=${Cities[e as IteratorType].lon}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`)
   }
-  const getContent = () => {
-    if (error) return <h2>Error when fetching: {error}</h2>
-    if (!data && isLoading) return <h2>LOADING...</h2>
-    if (!data) return <h1>placeholder</h1>
-    return <WeatherCard dt={data.current.dt * 1000} temp={data.current.temp} icon={data.current.weather[0].icon} />
+  // Fetch data for History weather
+  const handleHistorySelectorsChange = (city: string, date: number) => {
+    setHistoryUrl(`${process.env.REACT_APP_API_PAST_URL}lat=${Cities[city as IteratorType].lat}&lon=${Cities[city as IteratorType].lon}&dt=${date / 1000}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
+  }
+  // Handle Date pick event for History weaher
+  const handleDateChange = (e: any) => {
+    setDate(((new Date(e)).getTime()))
+  }
+  useEffect(() => {
+    if (city !== 'emptyCity' && !isNaN(date)) {
+      handleHistorySelectorsChange(city, date)
+    }
+  }, [date])
+  // Handle City pick event for History weaher
+  const handleHistoryCitySelectorChange = (e: any) => {
+    setCity(e)
+  }
+  useEffect(() => {
+    if (city !== 'emptyCity' && !isNaN(date)) {
+      handleHistorySelectorsChange(city, date)
+    }
+  }, [city])
+  const getForecastContent = () => {
+    if (forecastError) return <h2>Error when fetching: {forecastError}</h2>
+    if (!forecast && isForecastLoading) return <h2>LOADING...</h2>
+    if (!forecast) return <h1>placeholder</h1>
+    return <WeatherCard dt={forecast.current.dt * 1000} temp={forecast.current.temp} icon={forecast.current.weather[0].icon} />
+  }
+  const getHistoryContent = () => {
+    if (historyError) return <h2>Error when fetching: {historyError}</h2>
+    if (!history && isHistoryLoading) return <h2>LOADING...</h2>
+    if (!history || city === 'emptyCity' || isNaN(date)) return <h1>placeholder</h1>
+    console.log(history)
+    return <WeatherCard dt={history.current.dt * 1000} temp={history.current.temp} icon={history.current.weather[0].icon} />
   }
   return (
     <div className="App">
-     <div>
-      <CitySelector cities={Cities} handleChange={handleChange}/>
-      <div>
-      {getContent()}
-      </div>
-     </div>
-     <div>
+     <header className='header'>
 
-     </div>
+     </header>
+     <main className='container'>
+     <section className='forecast'>
+      <CitySelector cities={Cities} handleChange={handleForecastCitySelectorChange}/>
+      <div>
+      {getForecastContent()}
+      </div>
+     </section>
+     <section className='history'>
+      <input type='date' min={minDate} max={maxDate} onChange={e => handleDateChange(e.target.value)}></input>
+      <CitySelector cities={Cities} handleChange={handleHistoryCitySelectorChange}/>
+      <div>
+        {getHistoryContent()}
+      </div>
+     </section>
+     </main>
+     <footer className='footer'>
+
+     </footer>
     </div>
   )
 }
