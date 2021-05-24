@@ -1,0 +1,358 @@
+@font-face {
+  font-family: 'Ubuntu-react regular';
+  src: url(/src/assets/fonts/Ubuntu-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Ubuntu-react bold';
+  src: url(/src/assets/fonts/Ubuntu-Bold.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Ubuntu-react bold-italic';
+  src: url(/src/assets/fonts/Ubuntu-BoldItalic.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Ubuntu-react italic';
+  src: url(/src/assets/fonts/Ubuntu-Italic.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Ubuntu-react light';
+  src: url(/src/assets/fonts/Ubuntu-Light.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Ubuntu-react light-italic';
+  src: url(/src/assets/fonts/Ubuntu-LightItalic.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Ubuntu-react medium';
+  src: url(/src/assets/fonts/Ubuntu-Medium.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Ubuntu-react medium-italic';
+  src: url(/src/assets/fonts/Ubuntu-MediumItalic.ttf) format('truetype');
+}
+html {
+  margin: 0;
+  padding: 0; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  max-width: 1440px;
+  max-height: 1094px;
+  text-align: center;
+  --Accent: #373AF5;
+  --Secondary: #8083A4;
+  --Base_Strong: #2C2D76;
+  --Critic: #E5596D;
+  --Base_Weak: #FFFFFF;
+  background: url('/src/assets/backgrounds/background-bottom2x.png'), url('/src/assets/backgrounds/background-top2x.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--Accent);
+  background-size: 100% auto;
+  
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  margin: 0;
+  padding: 0; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.app-container {
+  margin: 0;
+  padding: 0; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  margin: 0;
+  padding: 0; 
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.weatherCard{
+  margin: 0;
+  padding: 0;
+  font-family: 'Ubuntu-React regular';
+  color: var(--Base_Weak);
+  background-color: var(--Accent);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-radius: 5%;
+  width: 174px;
+  height: 238px;
+  margin-right: 10px;
+  margin-bottom: 0;
+  align-items: center;
+  box-shadow: 0px 4px 4px rgba(4, 5, 73, 0.25), 14px 14px 20px rgba(5, 6, 114, 0.2);
+  
+}
+
+.weatherForecast{
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 550px;
+  height: 300px;  
+  overflow: hidden;
+  overflow-x: scroll;
+  scrollbar-width: 4px;
+}
+
+.weatherForecast::-webkit-scrollbar {
+  width:4px;
+  background: transparent;
+}
+
+.weatherForecast-container {
+  display: flex;
+  flex-direction: row;
+  width: 999999px;
+  height:238px;
+}
+
+.header-title {
+  font-family: 'Ubuntu-React regular';
+  color: var(--Base_Weak);
+}
+
+.weather-section {
+  display: flex;
+  flex-direction: column;
+  width: 660px;
+  height: 524px;
+  background-color: var(--Base_Weak);
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(4, 5, 73, 0.25), 14px 14px 20px rgba(5, 6, 114, 0.2);
+  margin-left: 15px;
+  margin-right: 15px;  
+}
+
+.citySelector {
+  width: 252px;
+  height: 48px;
+  /* Secondary 0.06 */
+  background: rgba(128, 131, 164, 0.06);
+  /* Secondary 0.2 */
+  border: 2px solid rgba(128, 131, 164, 0.2);
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+.citySelector-value{
+  font-family: 'Ubuntu-React regular';
+  color: var(--Base_Strong);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400px;
+  
+}
+
+.dateSelector {
+  margin-left: 40px;
+  width: 252px;
+  height: 48px;
+  /* Secondary 0.06 */
+  background: rgba(128, 131, 164, 0.06);
+  /* Secondary 0.2 */
+  border: 2px solid rgba(128, 131, 164, 0.2);
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+.citySelector:hover {
+  opacity: 0.6;
+}
+
+.dateSelector:hover {
+  opacity: 0.6;
+}
+
+.weatherCard-container{
+  width: 134px;
+  height: 198px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;    
+}
+
+.weatherCard-date-container{
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.weatherCard-date {
+  color: var(--Base_Weak);
+  font-family: 'Ubuntu-React bold';
+  font-size: 16px;
+  font-weight: 700;  
+}
+
+.weatherCard-temp-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items:flex-end;
+  margin: 0;
+}
+.weatherCard-temp {
+  color: var(--Base_Weak);
+  font-family: 'Ubuntu-React regular';
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.weatherCard-icon {
+  width: 120px;
+  height: 120px;
+}
+
+.weatherCard-icon-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.weatherCard-icon-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.weather-section-title-wrapper{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 58px;
+  margin-bottom: 32px;
+}
+
+.weather-section-title {
+  color: var(--Base_Strong);
+  font-family: 'Ubuntu-React regular';
+  font-size: 32px;
+  line-height: 32px;
+  font-weight: 700;
+}
+
+.selector-wrapper {
+  margin: 0;
+  padding: 0;
+  margin-left: 58px;
+  margin-bottom: 54px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.weather-section-forecast-content {
+  margin: 0;
+  padding: 0;
+  margin-left: 58px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.weather-section-history-content {
+  margin: 0;
+  padding: 0;
+  margin-left: 58px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.placeholder-text {
+  font-family: 'Ubuntu-React bold';
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  color: var(--Secondary);
+}
+
+.placeholder-wrapper {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 53px;
+}
+
+.placeholder-image-wrapper {
+  margin-bottom: 28px;
+}
+
+.header-title {
+  margin: 0;
+  padding: 0;
+  font-family: 'Ubuntu-React regular';
+  font-size: 102px;
+  line-height: 122px;
+  color: var(--Base_Weak);
+  font-weight: 700;
+}
+
+.header-title-left {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.header-title-right {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-title {
+  margin:0;
+  padding: 0;
+  position: absolute;
+  bottom: 16px;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--Base_Weak);
+  font-family: 'Ubuntu-React regular';
+
+}
