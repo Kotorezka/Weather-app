@@ -1,15 +1,12 @@
 .App {
-  font-family: Ubuntu;
-  width: 100%;
-  height: 100%;
+  
   text-align: center;
   --Accent: #373AF5;
   --Secondary: #8083A4;
   --Base_Strong: #2C2D76;
   --Critic: #E5596D;
   --Base_Weak: #FFFFFF;
-  background: url('../src/assets/backgrounds/background-bottom2x.png') url('../src/assets/backgrounds/background-top2x.png');
-  background-color: var(--Accent);
+  
 }
 
 .App-logo {

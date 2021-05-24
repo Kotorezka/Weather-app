@@ -1,46 +1,29 @@
-# Getting Started with Create React App
+# Что, почему и как сделано:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Для подтягивания данных с API было сделано два отдельных хука: для прогноза на 7 дней и для прогноза на дату в прошлом. Не придумал, как реализовать, используя только один хуй и/или более оптимизировано.
 
-## Available Scripts
+В карусели карточки был вынужден захардкодить, потому что выползала ошибка, времени исправлять, которую не было.
 
-In the project directory, you can run:
+Карусель можно прокручивать стрелками на клавиатуре, предварительно щелкнув по любой из карточек (взяв блок в фокус)
 
-### `npm start`
+В каждом хуке, отслеживающим изменения даты и города для исторического прогноза запрос к API, как сделать так, чтобы отследить окончание выполнения сразу двух событий я не придумал.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Моменты сомнения:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Наверное, можно было бы еще сильнее разделить логику, освободив главный класс.
 
-### `npm test`
+# Что не сделано: 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Из-за отсутствия времени в связи с работой не было сделано:
+    Кастомная карусель, с функционалом согласно требованиям
+    Карточка в историческом прогнозе, такая же, как и в прогнозе на 7 дней.
+    Плейсхолдер в селекторе даты не соответствует макету
+    Фактическое отсутствие адаптивной верстки и много кривых моментов при жестком верстании
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Другое:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+С хуками и TS столкнулся впервые и даже такие результаты за 10 дней меня очень радуют.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Жаль, что нельзя было использовать UI фреймворки типа React-Material или React-Bootstrap, так бы я успел закончить с версткой.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

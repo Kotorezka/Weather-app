@@ -14,10 +14,10 @@ const CitySelector = (props : CitySelectorProps) => {
     }
   }
   return (
-    <select onChange={(event) => props.handleChange(event.target.value)}>
+    <select className='citySelector' onChange={(event) => props.handleChange(event.target.value)}>
         <option value='empty' selected disabled hidden>Select city</option>
         {citiesArray.map(item => (
-            <option key={item} value={item}>{item}</option>
+            <option key={item} className="citySelector-value" value={item}>{item}</option>
         ))}
             </select>
   )

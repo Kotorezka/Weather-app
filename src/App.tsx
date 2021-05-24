@@ -7,6 +7,7 @@ import Cities from './source/Cities.json'
 import CitySelector from './components/CitySelector'
 import UseForecastFetch from './hooks/UseForecastFetch'
 import UseHistoryFetch from './hooks/UseHistoryFetch'
+import Placeholder from './components/Placeholder'
 function App () {
   // Custom type to interate JSON
   type IteratorType = keyof typeof Cities
@@ -49,34 +50,44 @@ function App () {
   const getForecastContent = () => {
     if (forecastError) return <h2>Error when fetching: {forecastError}</h2>
     if (!forecast && isForecastLoading) return <h2>LOADING...</h2>
-    if (!forecast) return <h1>placeholder</h1>
+    if (!forecast) return <Placeholder />
     return <WeatherForecast dates={forecast.daily} />
   }
   const getHistoryContent = () => {
     if (historyError) return <h2>Error when fetching: {historyError}</h2>
     if (!history && isHistoryLoading) return <h2>LOADING...</h2>
-    if (!history || city === 'emptyCity' || isNaN(date)) return <h1>placeholder</h1>
+    if (!history || city === 'emptyCity' || isNaN(date)) return <Placeholder />
     console.log(history)
     return <WeatherCard dt={history.current.dt * 1000} temp={history.current.temp} icon={history.current.weather[0].icon} />
   }
   return (
     <div className="App">
+     <div className='app-container'>
      <header className='header'>
-      <h1 className='header-title'></h1>
+      <span className='header-title-left'><h1 className='header-title'>Weather</h1></span>
+      <span className='header-title-right'><h1 className='header-title'>forecast</h1></span>
      </header>
      <main className='container'>
      <section className='weather-section forecast'>
-     <h2 className='weather-section-title'>7 Days Forecast</h2>
-      <CitySelector cities={Cities} handleChange={handleForecastCitySelectorChange}/>
-      <div>
+     <span className='weather-section-title-wrapper'>
+      <h2 className='weather-section-title'>7 Days Forecast</h2>
+     </span>
+     <span className='selector-wrapper'>
+        <CitySelector cities={Cities} handleChange={handleForecastCitySelectorChange}/>
+     </span>
+      <div className='weather-section-forecast-content'>
       {getForecastContent()}
       </div>
      </section>
      <section className='weather-section history'>
-      <h2 className='weather-section-title'>Forecast for a Date in the Past</h2>
-      <input type='date' min={minDate} max={maxDate} onChange={e => handleDateChange(e.target.value)}></input>
-      <CitySelector cities={Cities} handleChange={handleHistoryCitySelectorChange}/>
-      <div>
+       <span className='weather-section-title-wrapper'>
+       <h2 className='weather-section-title'>Forecast for a Date in the Past</h2>
+       </span>
+       <span className='selector-wrapper'>
+        <CitySelector cities={Cities} handleChange={handleHistoryCitySelectorChange}/>
+        <input className='dateSelector' type='date' min={minDate} max={maxDate} onChange={e => handleDateChange(e.target.value)}></input>
+       </span>
+      <div className='weather-section-history-content'>
         {getHistoryContent()}
       </div>
      </section>
@@ -84,6 +95,7 @@ function App () {
      <footer className='footer'>
         <span className='footer-title'>С ЛЮБОВЬЮ ОТ MERCURY DEVELOPMENT</span>
      </footer>
+     </div>
     </div>
   )
 }

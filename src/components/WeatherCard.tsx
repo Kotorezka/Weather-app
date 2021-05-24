@@ -26,9 +26,17 @@ const WeatherCard = (props : WeatherCardProps) => {
   type MonthsIterator = keyof typeof months
   return (
     <div className='weatherCard'>
-        <span className="weatherCard-date">{`${date.getDate()} ${months[date.getMonth() as MonthsIterator]} ${date.getFullYear()}`}</span>
-        <span className="weatherCard-icon"><img src={ `${process.env.REACT_APP_ICON_URL}/${props.icon}@2x.png` } /></span>
-        <span className="weatherCard-temp">{+props.temp > 0 ? `+${Math.round(+props.temp)}°` : `-${Math.round(+props.temp)}°`}</span>
+        <div className='weatherCard-container'>
+          <section className='weatherCard-date-container'>
+            <span className="weatherCard-date">{`${date.getDate()} ${months[date.getMonth() as MonthsIterator]} ${date.getFullYear()}`}</span>
+          </section>
+          <section className="weatherCard-icon-container">
+            <span className="weatherCard-icon-wrapper"><img className="weatherCard-icon" src={ `${process.env.REACT_APP_ICON_URL}/${props.icon}@2x.png` } /></span>
+          </section>
+          <section className="weatherCard-temp-container">
+            <h1 className="weatherCard-temp">{+props.temp > 0 ? `+${Math.round(+props.temp)}°` : `-${Math.round(+props.temp)}°`}</h1>
+          </section>
+        </div>
   </div>
   )
 }
